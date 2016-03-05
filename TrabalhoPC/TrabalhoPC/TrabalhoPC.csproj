@@ -36,8 +36,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="RungeKutta.cs" />
     <Compile Include="Ponto.cs" />
+    <Compile Include="VariableStep.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

@@ -12,15 +12,18 @@ namespace TrabalhoPC
         public double H { get; set; }
         public double V0 { get; set; }
         public double X0 { get; set; }
-        public RungeKutta4(double H, double V0, double X0)
-        {
-            this.H = H;
-            this.V0 = V0;
-            this.X0 = X0;
-        }
+        //public RungeKutta4(double H, double V0, double X0)
+        //{
+        //this.H = H;
+        //this.V0 = V0;
+        //this.X0 = X0;
+        //}
 
-        public Ponto[] Executa()
+
+        public Ponto[] Executa(double H, double V0, double X0)
         {
+
+            Console.WriteLine("Passou");
             double[] VectorX = new double[4];
             double[] VectorV = new double[4];
             VectorX[0] = X0;
@@ -37,15 +40,15 @@ namespace TrabalhoPC
             }
 
             Ponto[] resp = new Ponto[3];
-
+            Console.WriteLine("Passou");
             for (int i = 1; i <= 3; i++)
             {
                 resp[i - 1] = new Ponto(VectorX[i], VectorV[i]);
             }
-            
+
             return resp;
         }
-        private double CalculaDiferencial(double X, double Y)
+        public double CalculaDiferencial(double X, double Y)
         {
             double resp = Y - Math.Pow(X, 2) + 1;
             return resp;
