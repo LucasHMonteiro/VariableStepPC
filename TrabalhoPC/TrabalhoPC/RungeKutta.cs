@@ -23,7 +23,7 @@ namespace TrabalhoPC
         public Ponto[] Executa(double H, double V0, double X0)
         {
 
-            Console.WriteLine("Passou");
+            
             double[] VectorX = new double[4];
             double[] VectorV = new double[4];
             VectorX[0] = X0;
@@ -40,7 +40,7 @@ namespace TrabalhoPC
             }
 
             Ponto[] resp = new Ponto[3];
-            Console.WriteLine("Passou");
+            
             for (int i = 1; i <= 3; i++)
             {
                 resp[i - 1] = new Ponto(VectorX[i], VectorV[i]);
