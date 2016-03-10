@@ -14,7 +14,7 @@ public class VariableStep{
     Ponto[] RespRK = new Ponto[4];
     int i;
 
-    public ArrayList RungeKutta4(double extremoA, double extremoB, double alpha, double tolerancia, double Hmax, double Hmin){
+    public ArrayList Executa(double extremoA, double extremoB, double alpha, double tolerancia, double Hmax, double Hmin){
         A = extremoA;
         B = extremoB;
         Alfa = alpha;

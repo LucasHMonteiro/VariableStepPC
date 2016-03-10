@@ -141,7 +141,7 @@ class TestForm : Form {
     }
     ArrayList resp;
     VariableStep VS = new VariableStep();
-    resp = VS.RungeKutta4(a, b, alpha, tol, hmax, hmin);
+    resp = VS.Executa(a, b, alpha, tol, hmax, hmin);
     try{
       VS.toXML(resp, "solutions.xml");
       VS.toHTML(resp, "solutions.html");
