@@ -110,6 +110,8 @@ public class VariableStep{
                 if (h < Hmin){      //passo 19
                     Flag = false;
                     Console.WriteLine("Hmin ultrapassado");
+                    String[] aux = {"Hmin ultrapassado","","",""};
+                    ultimateResp.Add(aux);
                 }
                 else{
                     if (Nflag){
