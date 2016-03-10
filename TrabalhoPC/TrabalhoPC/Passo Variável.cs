@@ -142,10 +142,14 @@ class TestForm : Form {
     ArrayList resp;
     VariableStep VS = new VariableStep();
     resp = VS.RungeKutta4(a, b, alpha, tol, hmax, hmin);
-    VS.toXML(resp, "solutions.xml");
-    VS.toHTML(resp, "solutions.html");
-    MessageBox.Show("Soluções geradas com sucesso!");
-    this.Controls.Add(openHtml);
+    try{
+      VS.toXML(resp, "solutions.xml");
+      VS.toHTML(resp, "solutions.html");
+      MessageBox.Show("Soluções geradas com sucesso!");
+      this.Controls.Add(openHtml);
+    }catch(System.Exception){
+      MessageBox.Show("hmin ultrapassado!");
+    }
   }
 
   public void openFile(object sender, System.EventArgs e){

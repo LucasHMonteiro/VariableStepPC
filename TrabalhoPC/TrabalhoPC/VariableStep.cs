@@ -109,9 +109,7 @@ public class VariableStep{
                 }
                 if (h < Hmin){      //passo 19
                     Flag = false;
-                    Console.WriteLine("Hmin ultrapassado");
-                    String[] aux = {"Hmin ultrapassado","","",""};
-                    ultimateResp.Add(aux);
+                    return null;
                 }
                 else{
                     if (Nflag){
@@ -148,6 +146,9 @@ public class VariableStep{
         }
     }
     public void toXML(ArrayList ultimateResp, string fileName){
+      if(ultimateResp == null){
+        throw new System.Exception();
+      }
       using(XmlWriter writer = XmlWriter.Create(fileName)){
         writer.WriteStartDocument();
         writer.WriteStartElement("solutions");
@@ -164,6 +165,9 @@ public class VariableStep{
       }
     }
     public void toHTML(ArrayList ultimateResp, string fileName){
+      if(ultimateResp == null){
+        throw new System.Exception();
+      }
       StringWriter stringWriter = new StringWriter();
 
       using(HtmlTextWriter writer = new HtmlTextWriter(stringWriter)){
