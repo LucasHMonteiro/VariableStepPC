@@ -35,8 +35,8 @@ public class VariableStep{
         Nflag = true;
         i = 4;
         double Taux = t[3] + h;
-        while (Flag){
-            temp1 = RK4.CalculaDiferencial(t[i - 1], w[i - 1]);
+        while (Flag){//passo 4
+            temp1 = RK4.CalculaDiferencial(t[i - 1], w[i - 1]); //passo 5
             temp2 = RK4.CalculaDiferencial(t[i - 2], w[i - 2]);
             temp3 = RK4.CalculaDiferencial(t[i - 3], w[i - 3]);
             temp4 = RK4.CalculaDiferencial(t[i - 4], w[i - 4]);
@@ -80,16 +80,16 @@ public class VariableStep{
                     Nflag = false;
                     if ((Sigma <=( 0.1 * Tol)) || ((t[i - 1] + h) > B)){ //passo 11
                         double qAux = Tol / (2d * Sigma);
-                        q = Math.Pow(qAux, 0.25);
-                        if (q > 4){
+                        q = Math.Pow(qAux, 0.25);//passo 12
+                        if (q > 4){//passo 13
                             h = 4d * h;
                         }else{
                             h = q * h;
                         }
-                        if (h > Hmax){
+                        if (h > Hmax){//passo 14
                             h = Hmax;
                         }
-                        if ((t[i - 1] + 4d * h) > B){
+                        if ((t[i - 1] + 4d * h) > B){//passo 15
                             h = (B - t[i - 1]) / 4d;
                             Last = true;
                         }
