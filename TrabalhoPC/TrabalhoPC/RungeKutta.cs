@@ -33,7 +33,9 @@ namespace TrabalhoPC{
             return resp;
         }
         public double CalculaDiferencial(double X, double Y){
-            return Y - Math.Pow(X, 2) + 1;
+          //  return //Y - Math.Pow(X, 2) + 1;
+              return -0.5*Y;
+            //  return 1+ Math.Pow((X-Y),2);
         }
     }
 }

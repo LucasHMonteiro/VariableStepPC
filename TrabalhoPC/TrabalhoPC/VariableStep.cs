@@ -47,6 +47,10 @@ public class VariableStep{
             temp4 = RK4.CalculaDiferencial(t[i - 3], w[i - 3]);
             Wc = w[i - 1] + (h / 24d) * ((9d * temp1) + (19d * temp2) - (5d * temp3) + temp4);
             Sigma = 19d * (Math.Abs(Wc - Wp)) / (270d * h);
+            Console.Write("h = " +h+"\n");
+            Console.Write("wp = " +Wp+"\n");
+            Console.Write("wc = " +Wc+"\n");
+            Console.Write("sigma = " +Sigma+"\n");
             if (Sigma <= Tol){  //Passo 6
                 w.Insert(i, Wc); //Passo 7
                 t.Insert(i, Taux);
