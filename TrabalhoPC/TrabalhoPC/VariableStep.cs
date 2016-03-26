@@ -5,14 +5,21 @@ using System.Collections.Generic;
 using System.Xml;
 using System.IO;
 using System.Web.UI;
+
 public class VariableStep{
 
+    private String function;
     double A, B, Alfa, Sigma, Tol, Hmax, Hmin, Wp, Wc, q, h;
     double[] saida;
     Boolean Flag, Last, Nflag;
-    CalculosAuxiliares RK4 = new CalculosAuxiliares();
+    CalculosAuxiliares RK4;
     Ponto[] RespRK = new Ponto[4];
     int i;
+
+    public VariableStep(String function){
+      this.function = function;
+      this.RK4 = new CalculosAuxiliares(this.function);
+    }
 
     public ArrayList Executa(double extremoA, double extremoB, double alpha, double tolerancia, double Hmax, double Hmin){
         A = extremoA;
@@ -47,10 +54,10 @@ public class VariableStep{
             temp4 = RK4.CalculaDiferencial(t[i - 3], w[i - 3]);
             Wc = w[i - 1] + (h / 24d) * ((9d * temp1) + (19d * temp2) - (5d * temp3) + temp4);
             Sigma = 19d * (Math.Abs(Wc - Wp)) / (270d * h);
-            Console.Write("h = " +h+"\n");
-            Console.Write("wp = " +Wp+"\n");
-            Console.Write("wc = " +Wc+"\n");
-            Console.Write("sigma = " +Sigma+"\n");
+            // Console.Write("h = " +h+"\n");
+            // Console.Write("wp = " +Wp+"\n");
+            // Console.Write("wc = " +Wc+"\n");
+            // Console.Write("sigma = " +Sigma+"\n");
             if (Sigma <= Tol){  //Passo 6
                 w.Insert(i, Wc); //Passo 7
                 t.Insert(i, Taux);

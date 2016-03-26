@@ -5,6 +5,7 @@ using TrabalhoPC;
 using System.Collections.Generic;
 
 class TestForm : Form {
+  public TextBox function;
   public TextBox aValue;
   public TextBox bValue;
   public TextBox condValue;
@@ -23,24 +24,32 @@ class TestForm : Form {
     this.openHtml.Click += new System.EventHandler(this.openFile);
     this.openHtml.Location = new System.Drawing.Point(230, 100);
 
+    Label edo = new Label();
+    edo.Text = "y' = ";
+    edo.Size = new System.Drawing.Size(30, 20);
+    edo.Location = new System.Drawing.Point(210, 15);
+    this.function = new TextBox();
+    this.function.Size = new System.Drawing.Size(100, 20);
+    this.function.Location = new System.Drawing.Point(240, 13);
+
     Label a = new Label();
-    a.Text = "a: ";
-    a.Size = new System.Drawing.Size(20, 20);
+    a.Text = "Início do Intervalo: ";
+    a.Size = new System.Drawing.Size(100, 20);
     a.Location = new System.Drawing.Point(15, 15);
     this.aValue = new TextBox();
     this.aValue.Size = new System.Drawing.Size(50, 20);
     this.aValue.Location = new System.Drawing.Point(115, 13);
 
     Label b = new Label();
-    b.Text = "b: ";
-    b.Size = new System.Drawing.Size(20, 20);
+    b.Text = "Final do Intervalo: ";
+    b.Size = new System.Drawing.Size(100, 20);
     b.Location = new System.Drawing.Point(15, 45);
     this.bValue = new TextBox();
     this.bValue.Size = new System.Drawing.Size(50, 20);
     this.bValue.Location = new System.Drawing.Point(115, 43);
 
     Label condicao = new Label();
-    condicao.Text = "alfa: ";
+    condicao.Text = "Valor Inicial (y(a)): ";
     condicao.Size = new System.Drawing.Size(100, 20);
     condicao.Location = new System.Drawing.Point(15, 75);
     this.condValue = new TextBox();
@@ -48,24 +57,24 @@ class TestForm : Form {
     this.condValue.Location = new System.Drawing.Point(115, 73);
 
     Label tol = new Label();
-    tol.Text = "TOL: ";
-    tol.Size = new System.Drawing.Size(40, 20);
+    tol.Text = "Tolerância: ";
+    tol.Size = new System.Drawing.Size(80, 20);
     tol.Location = new System.Drawing.Point(15, 105);
     this.tolValue = new TextBox();
     this.tolValue.Size = new System.Drawing.Size(50, 20);
     this.tolValue.Location = new System.Drawing.Point(115, 103);
 
     Label hmax = new Label();
-    hmax.Text = "hmax: ";
-    hmax.Size = new System.Drawing.Size(40, 20);
+    hmax.Text = "H máximo: ";
+    hmax.Size = new System.Drawing.Size(80, 20);
     hmax.Location = new System.Drawing.Point(15, 135);
     this.hmaxValue = new TextBox();
     this.hmaxValue.Size = new System.Drawing.Size(50, 20);
     this.hmaxValue.Location = new System.Drawing.Point(115, 133);
 
     Label hmin = new Label();
-    hmin.Text = "hmin: ";
-    hmin.Size = new System.Drawing.Size(40, 20);
+    hmin.Text = "H mínimo: ";
+    hmin.Size = new System.Drawing.Size(80, 20);
     hmin.Location = new System.Drawing.Point(15, 165);
     this.hminValue = new TextBox();
     this.hminValue.Size = new System.Drawing.Size(50, 20);
@@ -75,6 +84,8 @@ class TestForm : Form {
     gen.Text = "Gerar";
     gen.Location = new System.Drawing.Point(295, 225);
     gen.Click += new System.EventHandler(this.generate);
+    this.Controls.Add(edo);
+    this.Controls.Add(function);
     this.Controls.Add(gen);
     this.Controls.Add(a);
     this.Controls.Add(aValue);
@@ -140,7 +151,7 @@ class TestForm : Form {
       MessageBox.Show("'{0}' é um número muito grande", this.hminValue.Text);
     }
     ArrayList resp;
-    VariableStep VS = new VariableStep();
+    VariableStep VS = new VariableStep(this.function.Text);
     resp = VS.Executa(a, b, alpha, tol, hmax, hmin);
     try{
       VS.toXML(resp, "solutions.xml");
