@@ -23,7 +23,7 @@ class TestForm : Form {
     this.openHtml.Text = "Abrir Arquivo";
     this.openHtml.Size = new System.Drawing.Size(100, 20);
     this.openHtml.Click += new System.EventHandler(this.openFile);
-    this.openHtml.Location = new System.Drawing.Point(230, 100);
+    this.openHtml.Location = new System.Drawing.Point(240, 87);
 
     Button about = new Button();
     about.Text = "Sobre";
@@ -91,22 +91,22 @@ class TestForm : Form {
     this.hminValue.Size = new System.Drawing.Size(50, 20);
     this.hminValue.Location = new System.Drawing.Point(115, 163);
 
+    this.Controls.Add(function);
+    this.Controls.Add(aValue);
+    this.Controls.Add(bValue);
+    this.Controls.Add(condValue);
+    this.Controls.Add(tolValue);
+    this.Controls.Add(hmaxValue);
+    this.Controls.Add(hminValue);
+    this.Controls.Add(a);
+    this.Controls.Add(b);
+    this.Controls.Add(tol);
     this.Controls.Add(about);
     this.Controls.Add(edo);
-    this.Controls.Add(function);
     this.Controls.Add(gen);
-    this.Controls.Add(a);
-    this.Controls.Add(aValue);
-    this.Controls.Add(b);
-    this.Controls.Add(bValue);
     this.Controls.Add(condicao);
-    this.Controls.Add(condValue);
-    this.Controls.Add(tol);
-    this.Controls.Add(tolValue);
     this.Controls.Add(hmax);
-    this.Controls.Add(hmaxValue);
     this.Controls.Add(hmin);
-    this.Controls.Add(hminValue);
   }
 
   public void generate(object sender, System.EventArgs e){
