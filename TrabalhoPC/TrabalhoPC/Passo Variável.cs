@@ -13,6 +13,7 @@ class TestForm : Form {
   public TextBox hmaxValue;
   public TextBox hminValue;
   public Button openHtml;
+  public Button about;
 
   public TestForm(string text){
     this.Text = text;
@@ -23,6 +24,16 @@ class TestForm : Form {
     this.openHtml.Size = new System.Drawing.Size(100, 20);
     this.openHtml.Click += new System.EventHandler(this.openFile);
     this.openHtml.Location = new System.Drawing.Point(230, 100);
+
+    Button about = new Button();
+    about.Text = "Sobre";
+    about.Location = new System.Drawing.Point(265, 125);
+    about.Click += new System.EventHandler(this.popUpAbout);
+
+    Button gen = new Button();
+    gen.Text = "Gerar";
+    gen.Location = new System.Drawing.Point(265, 163);
+    gen.Click += new System.EventHandler(this.generate);
 
     Label edo = new Label();
     edo.Text = "y' = ";
@@ -80,10 +91,7 @@ class TestForm : Form {
     this.hminValue.Size = new System.Drawing.Size(50, 20);
     this.hminValue.Location = new System.Drawing.Point(115, 163);
 
-    Button gen = new Button();
-    gen.Text = "Gerar";
-    gen.Location = new System.Drawing.Point(295, 225);
-    gen.Click += new System.EventHandler(this.generate);
+    this.Controls.Add(about);
     this.Controls.Add(edo);
     this.Controls.Add(function);
     this.Controls.Add(gen);
@@ -166,12 +174,16 @@ class TestForm : Form {
   public void openFile(object sender, System.EventArgs e){
     System.Diagnostics.Process.Start("solutions.html");
   }
+
+  public void popUpAbout(object sender, System.EventArgs e){
+    MessageBox.Show("Cálculo de EDO com passo múltipo de ordem 4 e H variável.\n\nCriado por: Gabriel Reis Carrara\n                     Lucas Monteiro\n                     Luiz Renato Vasconcelos\n                     Victor Olimpio");
+  }
 }
 
 class App{
   static void Main(){
     Form form = new TestForm("Passo Múltiplo com H Variável");
-    form.Size = new System.Drawing.Size(400, 300);
+    form.Size = new System.Drawing.Size(400, 250);
     Application.Run(form);
   }
 }
