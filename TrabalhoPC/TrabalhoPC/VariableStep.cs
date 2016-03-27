@@ -39,7 +39,7 @@ public class VariableStep
         w.Add(Alfa);
         if (Hmax * 3 > B - A)
         {
-            h = (B - A) / 4;
+            h = (B - A) / 5;
         }
         else
         {

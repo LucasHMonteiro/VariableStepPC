@@ -44,8 +44,8 @@ namespace TrabalhoPC{
             String y = Convert.ToString(Y).Replace(",", ".");
             String curr = this.function.Replace("x", x).Replace("y", y);
             //return Y - Math.Pow(X, 2) + 1;
-            //return -0.5 * Y;
-            double response = (double)parser.Parse(curr);
+            //return -100 * Y;
+            double response = parser.Parse(curr);
             return response;
             //  return 1+ Math.Pow((X-Y),2);
         }
