@@ -3,15 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mathos.Parser;
 
 namespace TrabalhoPC{
 
     class CalculosAuxiliares{
 
+        private String function;
+        private MathParser parser = new MathParser();
         private double K1, K2, K3, K4;
         public double H { get; set; }
         public double V0 { get; set; }
         public double X0 { get; set; }
+
+        public CalculosAuxiliares(String function){
+          this.function = function;
+        }
 
         public Ponto[] RungeKutta4(double H, double V0, double X0){
             double[] VectorX = new double[4];
@@ -33,8 +40,13 @@ namespace TrabalhoPC{
             return resp;
         }
         public double CalculaDiferencial(double X, double Y){
-          //  return //Y - Math.Pow(X, 2) + 1;
-              return -0.5*Y;
+            String x = Convert.ToString(X).Replace(",", ".");
+            String y = Convert.ToString(Y).Replace(",", ".");
+            String curr = this.function.Replace("x", x).Replace("y", y);
+            //return Y - Math.Pow(X, 2) + 1;
+            //return -0.5*Y;
+            double response = (double)parser.Parse(curr);
+            return response;
             //  return 1+ Math.Pow((X-Y),2);
         }
     }
