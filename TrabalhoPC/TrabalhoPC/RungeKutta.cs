@@ -40,12 +40,14 @@ namespace TrabalhoPC{
             return resp;
         }
         public double CalculaDiferencial(double X, double Y){
-            String x = Convert.ToString(X).Replace(",", ".");
-            String y = Convert.ToString(Y).Replace(",", ".");
+            String x = Convert.ToString(X);
+            String y = Convert.ToString(Y);
             String curr = this.function.Replace("x", x).Replace("y", y);
+            curr = curr.Replace(",", ".");
             //return Y - Math.Pow(X, 2) + 1;
             //return -0.5*Y;
-            double response = (double)parser.Parse(curr);
+            double response = parser.Parse(curr);
+            Console.Write(response+"\n");
             return response;
             //  return 1+ Math.Pow((X-Y),2);
         }
