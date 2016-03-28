@@ -47,7 +47,6 @@ namespace TrabalhoPC{
             //return Y - Math.Pow(X, 2) + 1;
             //return -0.5*Y;
             double response = parser.Parse(curr);
-            Console.Write(response+"\n");
             return response;
             //  return 1+ Math.Pow((X-Y),2);
         }
