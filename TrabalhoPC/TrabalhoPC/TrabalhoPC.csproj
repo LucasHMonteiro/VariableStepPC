@@ -36,14 +36,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main.cs" />
+    <Compile Include="Passo Variável.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="RungeKutta.cs" />
     <Compile Include="Ponto.cs" />
     <Compile Include="VariableStep.cs" />
-    <Compile Include="MathParser.cs"/>
+    <Compile Include="MathParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
