@@ -23,7 +23,7 @@ class TestForm : Form {
     this.openHtml.Text = "Abrir Arquivo";
     this.openHtml.Size = new System.Drawing.Size(100, 20);
     this.openHtml.Click += new System.EventHandler(this.openFile);
-    this.openHtml.Location = new System.Drawing.Point(240, 87);
+    this.openHtml.Location = new System.Drawing.Point(240, 50);
 
     Button about = new Button();
     about.Text = "Sobre";
@@ -34,6 +34,12 @@ class TestForm : Form {
     gen.Text = "Gerar";
     gen.Location = new System.Drawing.Point(265, 163);
     gen.Click += new System.EventHandler(this.generate);
+
+    Button algorithm = new Button();
+    algorithm.Text = "Mostrar Algoritmo";
+    algorithm.Location = new System.Drawing.Point(230, 90);
+    algorithm.Size = new System.Drawing.Size(110, 20);
+    algorithm.Click += new System.EventHandler(this.showAlgorithm);
 
     Label edo = new Label();
     edo.Text = "y' = ";
@@ -95,6 +101,7 @@ class TestForm : Form {
     this.hminValue.Size = new System.Drawing.Size(50, 20);
     this.hminValue.Location = new System.Drawing.Point(115, 163);
 
+    this.Controls.Add(algorithm);
     this.Controls.Add(edo2);
     this.Controls.Add(k);
     this.Controls.Add(aValue);
@@ -189,6 +196,87 @@ class TestForm : Form {
 
   public void popUpAbout(object sender, System.EventArgs e){
     MessageBox.Show("Cálculo de EDOs da forma y'= ay com passo múltipo de ordem 4 e H variável.\n\nCriado por: Gabriel Reis Carrara\n                     Lucas Monteiro\n                     Luiz Renato Vasconcelos\n                     Victor Olimpio");
+  }
+
+  public void showAlgorithm(object sender, System.EventArgs e){
+    System.IO.StreamWriter file = new System.IO.StreamWriter("algorithm.txt", true);
+    file.WriteLine(@"para j = 1, 2, 3
+    faça K1 = hf(xj-1, vj-1);
+            K2 = hf(xj-1 + h/2, vj-1 + K1/2)
+        K3 = hf(xj-1 + h/2, vj-1 + K2/2)
+        K4 = hf(xj-1 + h, vj-1 + K3)
+        vj = vj-1 + (K1 + 2K2 + 2K3 + K4)/6;
+        xj = x0 + jh
+
+Passo 2: Faça t0 = a;
+          w0 = α;
+                  h = hmax;
+          FLAG = 1; (FLAG será usado para sair do loop no Passo 4.)
+          LAST = 0: (LAST indica quando o último valor é calculado.)
+SAÍDA (t0, w0)
+
+Passo 3: Chame RK4(h, v0, t0, v1, t1, v2, t2, v3, t3);
+         Faça NFLAG = 1;  (Indica cálculo a partir de RK4.)
+        i = 4;
+        i = t3 + h
+
+Passo 4: Enquanto (FLAG = 1) siga os Passos 5-20.
+
+                        Passo 5: Faça WP = wi-1 + h24[55f(ti-1, wi-1) - 59f(ti-2, wi-1) + 37f(ti-3, wi-3, - 9f(ti-4, wi-4)]; (Prediz wi)
+                            WC = wi-1 + h24[9f(t, WP) + 19f(ti-1, wi-1) - 5f(ti-2, wi-2) + f(ti-3, wi-3)];  (Corrige wi)
+
+                            σ = 19 | WC - WP |/(270h)
+
+           Passo 6: Se σ  TOL então siga os passos 7-16 (Resultado aceito.) se não, siga os passos 17-19. (Resultado recusado.)
+
+            Passo 7: Faça wi = WC; (Resultado aceito.)
+                                   ti = t.
+
+            Passo 8: Se NFLAG = 1 então para j = i - 3, i - 2, i - 1, i
+                    SAÍDA(j, tj, wj, h);
+(Os resultados anteriores também ja aceitos)
+    se não, SAÍDA(i, ti, wi, h)
+
+              Passo 9 : Se LAST = 1 então faça FLAG = 0 (Próximo passo é o 20.) e n siga os passos 10-16.
+
+            Passo 10: Faça i = i + 1;
+                      NFLAG = 0.
+
+            Passo 11: Se σ  0,1 TOL ou ti-1 + h > b então siga os passos 12-16 (Aumenta h se é mais preciso que o requerido ou diminui h para incluir b como um ponto de rede.)
+
+            Passo 12: Faça q = (TOL/(2σ))¼
+
+            Passo 13: Se q > 4 então faça h = 4h
+                      Se não, faça h = qh.
+
+            Passo 14: Se h > hmax então faça h = hmax.
+
+            Passo 15: Se ti-1 + 4h > b então
+                      faça h = (b - ti-1)/4;
+                    LAST = 1
+            Passo 16: Chame RK4(h, wi-1, ti-1, wi, ti, wi+1, ti+1, wi+2, ti+2,);
+                      Faça NFLAG = 1;
+                      i = i + 3. (Ramo verdadeiro terminado. Próximo passo é o 20.)
+
+        Passo 17: Faça q = (TOL/(2σ))¼. (Ramo falso desde o Passo 6: resultado rejeitado)
+
+        Passo 18: Se q < 0,1 então faça h = 0,1h
+                se não, faça h = qh.
+
+        Passo 19: Se h < hmin então faça FLAG = 0;
+                        SAÍDA(“hmin ultrapassado”)
+                          se não
+                        se NFLAG = 1 então faça i = i - 3;
+                        (Resultados prévios também rejeitados.)
+                        Chame RK4(h, wi-1, ti-1, wi, ti, wi+1, ti+1, wi+2, ti+2,);
+                        faça i = i + 3;
+                              NFLAG = 1.
+
+        Passo 20: Faça t = ti-1 + h.
+
+        Passo 21: PARE.");
+        file.Close();
+        System.Diagnostics.Process.Start("algorithm.txt");
   }
 }
 
