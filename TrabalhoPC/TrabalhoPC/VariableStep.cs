@@ -9,7 +9,6 @@ using System.Web.UI;
 public class VariableStep
 {
 
-    private String function;
     double A, B, Alfa, Sigma, Tol, Hmax, Hmin, Wp, Wc, q, h;
     double[] saida;
     Boolean Flag, Last, Nflag;
@@ -17,10 +16,9 @@ public class VariableStep
     Ponto[] RespRK = new Ponto[4];
     int i;
 
-    public VariableStep(String function)
+    public VariableStep(double constant)
     {
-        this.function = function;
-        this.RK4 = new CalculosAuxiliares(this.function);
+        this.RK4 = new CalculosAuxiliares(constant);
     }
 
     public ArrayList Executa(double extremoA, double extremoB, double alpha, double tolerancia, double Hmax, double Hmin)

@@ -5,7 +5,7 @@ using TrabalhoPC;
 using System.Collections.Generic;
 
 class TestForm : Form {
-  public TextBox function;
+  public TextBox k;
   public TextBox aValue;
   public TextBox bValue;
   public TextBox condValue;
@@ -39,9 +39,13 @@ class TestForm : Form {
     edo.Text = "y' = ";
     edo.Size = new System.Drawing.Size(30, 20);
     edo.Location = new System.Drawing.Point(210, 15);
-    this.function = new TextBox();
-    this.function.Size = new System.Drawing.Size(100, 20);
-    this.function.Location = new System.Drawing.Point(240, 13);
+    Label edo2 = new Label();
+    edo2.Text = "y";
+    edo2.Size = new System.Drawing.Size(30, 20);
+    edo2.Location = new System.Drawing.Point(290, 15);
+    this.k = new TextBox();
+    this.k.Size = new System.Drawing.Size(50, 20);
+    this.k.Location = new System.Drawing.Point(240, 13);
 
     Label a = new Label();
     a.Text = "Início do Intervalo: ";
@@ -91,7 +95,8 @@ class TestForm : Form {
     this.hminValue.Size = new System.Drawing.Size(50, 20);
     this.hminValue.Location = new System.Drawing.Point(115, 163);
 
-    this.Controls.Add(function);
+    this.Controls.Add(edo2);
+    this.Controls.Add(k);
     this.Controls.Add(aValue);
     this.Controls.Add(bValue);
     this.Controls.Add(condValue);
@@ -110,7 +115,7 @@ class TestForm : Form {
   }
 
   public void generate(object sender, System.EventArgs e){
-    double a = 0, b = 0, alpha = 0, tol = 0, hmax = 0, hmin = 0;
+    double a = 0, b = 0, alpha = 0, tol = 0, hmax = 0, hmin = 0, k = 0;
     try{
       a = Convert.ToDouble(this.aValue.Text);
     }catch(FormatException){
@@ -158,8 +163,15 @@ class TestForm : Form {
     }catch(OverflowException){
       MessageBox.Show("'{0}' é um número muito grande", this.hminValue.Text);
     }
+    try{
+      k = Convert.ToDouble(this.k.Text);
+    }catch(FormatException){
+      MessageBox.Show("Não foi possível converter '{0}' para double", this.hminValue.Text);
+    }catch(OverflowException){
+      MessageBox.Show("'{0}' é um número muito grande", this.hminValue.Text);
+    }
     ArrayList resp;
-    VariableStep VS = new VariableStep(this.function.Text);
+    VariableStep VS = new VariableStep(k);
     resp = VS.Executa(a, b, alpha, tol, hmax, hmin);
     try{
       VS.toXML(resp, "solutions.xml");
@@ -176,7 +188,7 @@ class TestForm : Form {
   }
 
   public void popUpAbout(object sender, System.EventArgs e){
-    MessageBox.Show("Cálculo de EDO com passo múltipo de ordem 4 e H variável.\n\nCriado por: Gabriel Reis Carrara\n                     Lucas Monteiro\n                     Luiz Renato Vasconcelos\n                     Victor Olimpio");
+    MessageBox.Show("Cálculo de EDOs da forma y'= ay com passo múltipo de ordem 4 e H variável.\n\nCriado por: Gabriel Reis Carrara\n                     Lucas Monteiro\n                     Luiz Renato Vasconcelos\n                     Victor Olimpio");
   }
 }
 
